@@ -4,7 +4,8 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js'
+    index: './src/index.js',
+    renderer: './src/electron/renderer.js'
   },
   output: {
     clean: true,
@@ -28,6 +29,6 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 3000,
-    open: true
+    open: false
   }
 };
