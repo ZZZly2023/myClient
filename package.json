@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx webpack --config ./src/webpack/webpack.dev.config.js"
+    "dev": "npx webpack server --config ./src/webpack/webpack.dev.config.js"
   },
   "author": "",
   "license": "ISC",
