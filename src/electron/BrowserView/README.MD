@@ -1,0 +1,3 @@
+## BrowserView类已经被启用，由WebContentsView类替代
+
+BrowserView 可用于将其他web内容嵌入到BrowserWindow中。像一个子窗口，但它是相对于其所属窗口定位的。旨在作为webview的替代品。

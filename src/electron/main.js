@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const { registerAppEvents } = require('./app/index.js')
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -12,6 +13,11 @@ const createWindow = () => {
   win.loadURL('http://localhost:3000/')
 }
 
+// 当electron 完成初始化时触发一次。
+app.on('ready', (event, launchInfo) => {
+  console.log('app is ready')
+})
+
 app.whenReady().then(() => {
   createWindow()
   app.on('activate', () => {
@@ -21,8 +27,4 @@ app.whenReady().then(() => {
   })
 })
 
-app.on('window-all-closed', () => {
-  if (process.platform!== 'darwin') {
-    app.quit()
-  }
-})  
+registerAppEvents()
