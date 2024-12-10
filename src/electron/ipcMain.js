@@ -1,9 +1,14 @@
 // 主进程处理渲染进程传递的事件
 const { ipcMain }  = require('electron/main');
-const { appHandlers } = require('./app/index.js')
-const mainHandlers = {}
+const { appHandler } = require('./app/index.js')
+const { BrowserWindowHandler } = require('./BrowserWindow/index.js')
+// 主进程接收到来自渲染进程事件请求
+const mainHandlers = {
+  ...appHandler,
+  ...BrowserWindowHandler
+}
 
-Object.assign(mainHandlers, appHandlers)
+
 
 // 监听渲染进程的消息
 ipcMain.on('message-to-main', (event, ...args) => {})
