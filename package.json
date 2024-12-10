@@ -5,7 +5,8 @@
   "main": "./src/electron/main.js",
   "scripts": {
     "dev": "npx webpack server --config ./src/webpack/webpack.dev.config.js",
-    "start": "electron ./src/electron/main.js"
+    "start": "electron ./src/electron/main.js",
+    "debug": "electron ./src/electron/main.js --inspect-brk"
   },
   "author": "",
   "license": "ISC",
