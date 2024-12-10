@@ -1,9 +1,9 @@
-export { renderer } from './ipcRenderer.js'
+const renderer  = require('./ipcRenderer.js')
 const { contextBridge } = require('electron')
-contextBridge.exposeInMainWorld('versions', {
-  node: () => process.versions.node,
-  Chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron
-})
-
-contextBridge.exposeInMainWorld('renderer', renderer)
+console.log('contextBridge')
+contextBridge.exposeInMainWorld('renderer', 
+  {
+    cmdAsync: () => renderer.cmdAsync(),
+    sync: () => renderer.sync()
+  }
+)
