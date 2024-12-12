@@ -7,6 +7,8 @@ const { desktopCapturerHandler } = require('./desktopCapture/index.js')
 const { dialogHandlers } = require('./dialog/index.js')
 const { shortcuthandler } = require('./globalShortcut/index.js')
 const { nativeTheme } = require('electron/main')
+const { notifyHandlers } = require('./notification/index.js')
+const { powerSaveBlockerHandler } = require('./powerSaveBlocker/index.js')
 // 主进程接收到来自渲染进程事件请求
 const mainHandlers = {
   ...appHandlers, 
@@ -14,11 +16,14 @@ const mainHandlers = {
   ...desktopCapturerHandler,
   ...dialogHandlers,
   ...shortcuthandler,
+  ...notifyHandlers,
+  ...powerSaveBlockerHandler,
   'set-theme-color': (type) => {
     if ([ 'light', 'dark', 'system'].includes(type)) {
       nativeTheme.themeSource = type
     }
- }
+  },
+  
 }
 
 // 监听渲染进程的消息, 同步返回-returnValue
