@@ -39,7 +39,7 @@ function createWindow(params = {}, options = {}) {
   } else if (options.type === 'file') {
     win.loadFile(options.url)
   }
-  windowsMap.set(config.url, win)
+  windowsMap.set(options.url, win)
   registerWindowEvents(win)
   return win
 }
@@ -935,5 +935,6 @@ if(process.platform === 'darwin') {
 
 module.exports = {
   createWindow,
-  browserWindowHandler
+  browserWindowHandler,
+  windowsMap
 }

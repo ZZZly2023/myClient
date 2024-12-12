@@ -3,34 +3,38 @@
  */ 
 const { ipcRenderer } = require('electron')
 
-async function cmdAsync(cmd, ...args) {
-  // return ipcRenderer.invoke(cmd,...args)
-}
-
-function sync(cmd, ...args) {
-  // return ipcRenderer.sendSync(cmd,...args)
-}
 // 渲染进程可处理的事件
-// const rendererHandlers = {}
+const rendererHandlers = {}
 
+async function cmdAsync(event, ...args) {
+  if (rendererHandlers[event]) {
+    return await rendererHandlers[event](...args)
+  } else {
+    console.log('event', event)
+    const res = await ipcRenderer.invoke('message-to-main', event, ...args)
+    return res
+  }
+}
 
-// // 监听主进程的消息
-// ipcRenderer.on('message-to-renderer', (event, ...args) => {})
+function sync(event, ...args) {
+  if (rendererHandlers[event]) {
+    return rendererHandlers[event](...args)
+  } else {
+    return ipcRenderer.sendSync('sync-message', event,...args)
+  }
+}
 
-// // 一次性监听主进程的消息
-// ipcRenderer.once('message-to-renderer', (event, ...args) => {})
+function async(event,...args) {
+  if (rendererHandlers[event]) {
+    return rendererHandlers[event](...args)
+  } else {
+    ipcRenderer.send('async-message', event,...args)
+  }
+}
 
+// 监听主进程的消息
+ipcRenderer.on('async-message-reply', (event, ...args) => {
+  console.log('async-message-reply', event,...args)
+})
 
-
-// // 向主进程发送异步消息
-// ipcRenderer.send('message-to-main', async (event,...args) => {})
-
-// // 向主进程发送同步消息
-// ipcRenderer.sendSync('message-to-main:sync', (event,...args) => {})
-
-// ipcRenderer.invoke('message-to-mian:invoke', (event,...args) => {})
-
-// // 向网页中的webview发送消息
-// ipcRenderer.sendToHost('message-to-host', ...args)
-
-module.exports = { cmdAsync, sync }
+module.exports = { cmdAsync, sync, async }

@@ -1,6 +1,7 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, desktopCapturer, session } = require('electron')
 const { registerAppEvents } = require('./app/index.js')
 const { createWindow } = require('./BrowserWindow/index.js')
+require('./ipcMain.js')
 
 // 当electron 完成初始化时触发一次。
 app.on('ready', (event, launchInfo) => {
@@ -8,6 +9,14 @@ app.on('ready', (event, launchInfo) => {
 })
 
 app.whenReady().then(() => {
+
+ session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
+  desktopCapturer.getSources({types: ['window'], thumbnailSize: { width: 0, height: 0 }}).then((sources) => {
+    callback({video: sources[0], audio: 'loopback'})
+  })
+ }, {
+  useSystemPicker: true
+ })
   createWindow({
     width: 800,
     height: 600,
@@ -20,6 +29,7 @@ app.whenReady().then(() => {
       webviewTag: true, // 启用webview标签
     }
   }, { type: 'url', url: 'http://localhost:3000/' })
+  
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
