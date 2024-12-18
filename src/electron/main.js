@@ -1,6 +1,8 @@
-const { app, BrowserWindow, desktopCapturer, session } = require('electron')
+const { app, BrowserWindow, desktopCapturer, session, utilityProcess, MessageChannelMain } = require('electron')
 const { registerAppEvents } = require('./app/index.js')
 const { createWindow } = require('./BrowserWindow/index.js')
+const path = require('path')
+
 require('./ipcMain.js')
 
 // 当electron 完成初始化时触发一次。
@@ -8,15 +10,39 @@ app.on('ready', (event, launchInfo) => {
   console.log('app is ready')
 })
 
-app.whenReady().then(() => {
 
+app.whenReady().then(() => {
  session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
-  desktopCapturer.getSources({types: ['window'], thumbnailSize: { width: 0, height: 0 }}).then((sources) => {
+  desktopCapturer.getSources({types: ['screen'], thumbnailSize: { width: 0, height: 0 }}).then((sources) => {
     callback({video: sources[0], audio: 'loopback'})
   })
+  // callback({video: request.frame, audio: 'loopback'})
  }, {
   useSystemPicker: true
  })
+
+ const { port1, port2 } = new MessageChannelMain()
+ const childProcess = utilityProcess.fork(path.resolve(__dirname, 'child.js'), ['you are my child'])
+ // 发送其中一个端口给子进程
+ childProcess.postMessage('give you phone', [port1]) // 只能通过postMessage发送端口
+ 
+// 父子进程可以不用port进行通信
+//  childProcess.on('message', (data) => {
+//   console.log('parent receive', data)
+//  })
+
+ // 父进程通过端口监听子进程消息
+ port2.on('message', ({data, ports}) => {
+  console.log('parent receive', data)
+})
+// 父进程通过端口给子进程发送消息
+port2.postMessage('hello child')
+
+// 启动端口
+port2.start()
+ 
+ 
+
   createWindow({
     width: 800,
     height: 600,

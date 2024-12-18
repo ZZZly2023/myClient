@@ -7,7 +7,7 @@ const baseConfig = {
   minHeight: 600,
   title: 'youzone', // 如果没有，则取自index.html的title
   icon: '', // 图标
-  frame: false, // 显示为无框窗口
+  frame: true, // 显示有框窗口
   show: false, // 创建后是否显示
 }
 

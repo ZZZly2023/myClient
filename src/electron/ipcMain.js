@@ -23,7 +23,6 @@ const mainHandlers = {
       nativeTheme.themeSource = type
     }
   },
-  
 }
 
 // 监听渲染进程的消息, 同步返回-returnValue
