@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { ProvidePlugin } = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -19,16 +20,34 @@ module.exports = {
         exclude: /node_modules/,
         include: path.resolve(__dirname, '../../src'),
         loader: 'babel-loader'
+      },
+      {
+        test: /\.(le|c)ss$/,
+        include: path.resolve(__dirname, '../../src'),
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      {
+        test: /\.(mp4|webm)$/,
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
     new HTMLWebpackPlugin({
       template: './src/index.html'
+    }),
+    new ProvidePlugin({
+      React: 'react'
     })],
   devServer: {
     host: 'localhost',
     port: 3000,
     open: false
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '@src': path.resolve(__dirname, '../../src')
+    }
   }
 };

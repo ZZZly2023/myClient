@@ -3,7 +3,7 @@ const { dialog } = require('electron/main');
 const dialogHandlers = {
   /**
    * 弹出系统对话框（同步）
-   * @param {*} win 
+   * @param {*} win 可选
    * @param {*} options 
    *   1.title 
    *   2.defaultPath

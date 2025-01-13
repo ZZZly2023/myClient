@@ -1,13 +1,9 @@
 const { BrowserWindow } = require('electron/main')
 const path = require('path')
 const baseConfig = {
-  width: 800,
-  height: 600,
-  minWidth: 800,
-  minHeight: 600,
   title: 'youzone', // 如果没有，则取自index.html的title
   icon: '', // 图标
-  frame: true, // 显示有框窗口
+  frame: false, // 显示有框窗口
   show: false, // 创建后是否显示
 }
 
@@ -34,6 +30,7 @@ function createWindow(params = {}, options = {}) {
   }
   console.log('创建窗口', config)
   const win = new BrowserWindow(config)
+  win.setResizable(false)
   if (options.type === 'url') {
     win.loadURL(options.url)
   } else if (options.type === 'file') {

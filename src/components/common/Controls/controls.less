@@ -1,0 +1,38 @@
+.mac-controls {
+  width: 75px;
+  height: 18px;
+  display: flex;
+  -webkit-app-region: no-drag;
+  > span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 3px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.hide {
+      background-image: url('@src/assets/frame/images/mac_close.png');
+      &:hover {
+        background-image: url('@src/assets/frame/images/mac_close_hover.png');
+      }
+    }
+    &.min {
+      background-image: url('@src/assets/frame/images/mac_min.png');
+      &:hover {
+        background-image: url('@src/assets/frame/images/mac_min_hover.png');
+      }
+    }
+    &.max {
+      background-image: url('@src/assets/frame/images/mac_max.png');
+      &:hover {
+        background-image: url('@src/assets/frame/images/mac_max_hover.png');
+      }
+    }
+  }
+}
