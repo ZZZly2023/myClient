@@ -1,6 +1,6 @@
 import MacControls from './MacControls';
 function Controls() {
-  const isMac = window.navigator.platform.includes('Mac');
+  const isMac = true;
   return isMac ? <MacControls /> : <WindowsControls />;
 }
 

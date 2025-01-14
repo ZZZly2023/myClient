@@ -28,6 +28,13 @@
         background-image: url('@src/assets/frame/images/mac_min_hover.png');
       }
     }
+    &.hide, &.min {
+      &.full {
+        background-color: #9e9e9e;
+        background-image: none;
+        pointer-events: none;
+      }
+    }
     &.max {
       background-image: url('@src/assets/frame/images/mac_max.png');
       &:hover {

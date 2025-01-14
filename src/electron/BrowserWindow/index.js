@@ -297,7 +297,7 @@ const browserWindowHandler = {
       win.restore() // 恢复窗口
     }
   },
-  'win-set-full-screen': (win, flag) => {
+  'win-set-full-screen': (win, { flag }) => {
     if (win) {
       win.setFullScreen(flag) // 设置窗口全屏
     }
