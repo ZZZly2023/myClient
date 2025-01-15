@@ -48,6 +48,9 @@ module.exports = {
     port: 3000,
     open: false
   },
+  optimization: {
+    runtimeChunk: 'single',
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
