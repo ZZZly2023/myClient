@@ -41,6 +41,7 @@ function createWindow(params = {}, options = {}) {
   return win
 }
 
+
 function registerWindowEvents(win) {
 
   // 当网页已渲染（但未显示）并且窗口可以在没有视觉闪烁的情况下显示时发出

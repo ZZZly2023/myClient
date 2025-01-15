@@ -1,7 +1,11 @@
 const { app, BrowserWindow, desktopCapturer, session, utilityProcess, MessageChannelMain } = require('electron')
 const { registerAppEvents } = require('./app/index.js')
 const { createWindow } = require('./BrowserWindow/index.js')
+const os = require('os')
+// const { installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
+const reactDevToolsPath = path.join(os.homedir(), '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/6.0.1_0')
+const reactReduxDevToolsPath = path.join(os.homedir(), '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
 
 require('./ipcMain.js')
 // app.disableHardwareAcceleration()
@@ -12,6 +16,9 @@ app.on('ready', (event, launchInfo) => {
 
 
 app.whenReady().then(() => {
+//  installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+//   .then(ext => console.log(`Added Extension:  ${ext.name}`))
+//   .catch(err => console.log('An error occurred: ', err))
  session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {
   desktopCapturer.getSources({types: ['screen'], thumbnailSize: { width: 0, height: 0 }}).then((sources) => {
     callback({video: sources[0], audio: 'loopback'})
@@ -19,6 +26,8 @@ app.whenReady().then(() => {
  }, {
   useSystemPicker: true
  })
+ session.defaultSession.loadExtension(reactDevToolsPath)
+ session.defaultSession.loadExtension(reactReduxDevToolsPath)
 
   createWindow({
     width: 1200,
@@ -39,5 +48,4 @@ app.whenReady().then(() => {
     }
   })
 })
-
 registerAppEvents()

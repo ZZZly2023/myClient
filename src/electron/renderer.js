@@ -1,11 +1,11 @@
-const targetNode = document.createElement('div');
-targetNode.innerHTML = `react is working`;
-document.body.appendChild(targetNode);
+// const targetNode = document.createElement('div');
+// targetNode.innerHTML = `react is working`;
+// document.body.appendChild(targetNode);
 
 // renderer.js
-const startButton = document.getElementById('startButton')
-const stopButton = document.getElementById('stopButton')
-const recordButton = document.getElementById('recordButton')
+// const startButton = document.getElementById('startButton')
+// const stopButton = document.getElementById('stopButton')
+// const recordButton = document.getElementById('recordButton')
 // const video = document.querySelector('video')
 // let mediaRecorder, mediaStream, recordedChunks = []
 

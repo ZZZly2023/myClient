@@ -1,11 +1,12 @@
 import React from "react";
 import './styles/app.less';
-import Controls from "./components/common/Controls/controls";
+import Controls from "./components/common/controls/Controls";
+import Login from "./components/login/Login";
 export default function App() {
   return (
     <div>
-      <Controls />
-      <h1>{ 'hello react' }</h1>
+        <Controls />
+        <Login />
     </div>
   );
 }

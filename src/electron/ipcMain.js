@@ -10,6 +10,7 @@ const { nativeTheme } = require('electron/main')
 const { notifyHandlers } = require('./notification/index.js')
 const { powerSaveBlockerHandler } = require('./powerSaveBlocker/index.js')
 const { fileHandlers } = require('./fs/index.js')
+const { osHandlers } = require('./os/index.js')
 // 主进程接收到来自渲染进程事件请求
 const mainHandlers = {
   ...appHandlers, 
@@ -20,6 +21,7 @@ const mainHandlers = {
   ...notifyHandlers,
   ...powerSaveBlockerHandler,
   ...fileHandlers,
+  ...osHandlers,
   'set-theme-color': (type) => {
     if ([ 'light', 'dark', 'system'].includes(type)) {
       nativeTheme.themeSource = type
