@@ -1,13 +1,13 @@
-export default function GroupAvater(props) {
+export default function GroupAvatar(props) {
   const { id } = props
   const photo = getPhotoFromId(id)
   return (
-    <div className="group-avater">
+    <div className="group-avatar">
       <img src={ photo } alt="group" />
     </div>
   );
 }
 
 function getPhotoFromId(id) {
-  return  "@src/assets/avater/default-group.png"
+  return  "@src/assets/avatar/default-group.png"
 }

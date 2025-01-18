@@ -24,7 +24,12 @@ module.exports = {
       {
         test: /\.(le|c)ss$/,
         include: path.resolve(__dirname, '../../src'),
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {
+            // modules: true
+          }
+        }, 'less-loader']
       },
       {
         test: /\.(mp4|webm)$/,

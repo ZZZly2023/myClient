@@ -1,9 +1,9 @@
-import icon from '@src/assets/frame/avater/icon.png'
-export default function RosterAvater(props) {
+import icon from '@src/assets/frame/avatar/icon.png'
+export default function RosterAvatar(props) {
   const { id, style } = props
   const photo = getPhotoFromId(id) || icon
   return (
-    <div className="roster-avater">
+    <div className="roster-avatar">
       <img src={ photo } style={ style ? style : {} } />
     </div>
   );
